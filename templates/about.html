@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About US PAGE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+  <style>
+    #nav-bar{
+        background-color: white;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: "Open Sans", sans-serif;
+        box-sizing: border-box;
+      }
+      
+      .about-section {
+        background: url(https://assets.thehansindia.com/h-upload/2021/11/05/1600x960_1120501-ec.jpg) no-repeat left;
+        background-size: 55%;
+        background-color: #fdfdfd;
+        overflow: hidden;
+        height: 100%;
+        padding: 100px 0;
+      }
+      
+      .inner-container {
+        width: 55%;
+        float: right;
+        background-color: #fdfdfd;
+        padding: 150px;
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+      }
+      
+      .inner-container h1 {
+        margin-bottom: 30px;
+        font-size: 30px;
+        font-weight: 900;
+      }
+      
+      .text {
+        font-size: 13px;
+        color: #545454;
+        line-height: 30px;
+        text-align: justify;
+        margin-bottom: 40px;
+      }
+      
+      h1 {
+        color: #F85370;
+      }
+      
+      .skills {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        font-size: 13px;
+      }
+      
+      @media screen and (max-width:1200px) {
+        .inner-container {
+            padding: 80px;
+        }
+      }
+      
+      @media screen and (max-width:1000px) {
+        .about-section {
+            background-size: 100%;
+            padding: 100px 40px;
+        }
+        .inner-container {
+            width: 100%;
+        }
+      }
+      
+      @media screen and (max-width:600px) {
+        .about-section {
+            padding: 0;
+        }
+        .inner-container {
+            padding: 60px;
+        }
+      }
+      
+      
+      
+      .fa {
+        padding: 20px;
+        font-size: 15px;
+        width: 50px;
+        text-align: center;
+        text-decoration: none;
+        margin: 5px 2px;
+        border-radius: 50px;
+      }
+      
+      .fa:hover {
+        opacity: 0.7;
+      }
+      
+      .fa-facebook {
+        background: #3B5998;
+        color: white;
+      }
+      
+      .fa-google {
+        background: #dd4b39;
+        color: white;
+      }
+      
+      .fa-linkedin {
+        background: #007bb5;
+        color: white;
+      }
+      
+      .fa-instagram {
+        background: #e75480;
+        color: white;
+      }
+      .fa-google-plus {
+        background: #fa0000;
+        color: white;
+      }
+      .fa-github{
+        color: white;
+        background: black
+      }
+      
+      .offcanvas-title{
+        color: rgb(8, 8, 8);
+        font-weight: 500;
+        font-size: 25px;
+    }
+    .nav-item .nav-link{
+        color: rgb(14, 13, 13);
+        font-weight: 500;
+        font-size: 20px;
+    }      
+  </style>
+  <body>
+    <nav class="navbar fixed-top" id="nav-bar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/" style="font-weight: 500;font-size: 25px;">E-Polling</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" style="border-color: rgb(255, 254, 255);">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">E-Polling</h5>
+              <button type="button" class="btn btn-light btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="background-color: rgb(255, 254, 255);"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/join">JOIN US</a>
+                </li>
+               
+                  <li class="nav-item">
+                    <a class="nav-link"  data-bs-toggle="modal" href="#exampleModalToggle">Admin</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/faq">FAQ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/about">About US</a>
+                  </li>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <div class="about-section">
+        <div class="inner-container">
+            <h1>About Us</h1>
+            <p class="text">
+                This is an E-Commerce Website for Books only Where you can find my different categories like- Computer & Internet, Engineering , Medical Science, Comic Books ,etc and we provide best price/discount to visit's customers and we are very trusted site among
+                other.
+            </p>
+            <div class="row">
+                <a href="https://www.facebook.com/mayank.chaturvedi.581730" class="fa fa-facebook"></a>
+                <a href="https://github.com/MayankChaturvedi14" class="fa fa-github"></a>
+                <a href="https://www.linkedin.com/in/mayank-chaturvedi-91757a1a6/" class="fa fa-linkedin"></a>
+                <a href="https://www.instagram.com/mayank.chaturvedi.581730/" class="fa fa-instagram"></a>
+                <a href="mailto:mayankchaturvedi565@gmail.com" class="fa fa-google-plus"></a>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel">Admin Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">&</span>
+                <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <a class="btn btn-primary" type="button"  href="/admin">Submit</a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>
