@@ -18,7 +18,9 @@ class Cn_Registeration(models.Model):
     Party = models.CharField(max_length=60,unique=True)
     Mobile = models.CharField(max_length=13,unique=True)
     Gender = models.CharField(max_length=60)
-    resume = models.FileField(upload_to='documents/%Y/%m/%d',blank=True, null=True)
+    doc_file = models.FileField(upload_to='documents/%Y/%m/%d',blank=True, null=True)
+
+    
 class Party(models.Model):
     BJP = models.CharField(max_length=13, blank=True, null=True)
     INC = models.CharField(max_length=13, blank=True, null=True)

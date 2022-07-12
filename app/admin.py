@@ -9,7 +9,7 @@ class SudoRegistration(admin.ModelAdmin):
     
 @admin.register(Cn_Registeration)
 class SudoCn_Registeration(admin.ModelAdmin):
-    list_display = ['Candidate_Name','Party','Mobile','Gender','resume']
+    list_display = ['Candidate_Name','Party','Mobile','Gender','doc_file']
 
 @admin.register(Party)
 class SudoParty(admin.ModelAdmin):

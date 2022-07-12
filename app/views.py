@@ -49,14 +49,22 @@ def cn(request):
         Partyfor = request.POST["party"]
         phone = request.POST["phone"]
         gender = request.POST["Gender"]
-        doc_file=request.FILES.get("case") 
-        print(doc_file)        
-        record = Cn_Registeration(Candidate_Name=candidatename,Party=Partyfor,Mobile=phone,Gender=gender,resume=doc_file) 
-        record.save()          
+        choice = request.POST.get("case")
+        if(choice.lower()=="yes"):
+            doc_file=request.FILES.get("docfile")  
+            record = Cn_Registeration(Candidate_Name=candidatename,Party=Partyfor,Mobile=phone,Gender=gender,doc_file=doc_file) 
+            record.save()   
+        else:
+            record = Cn_Registeration(Candidate_Name=candidatename,Party=Partyfor,Mobile=phone,Gender=gender) 
+            record.save()   
         return render(request,'admin.html')
     return render(request,'cn.html')
 
 def main(request):
+    Cn_record = Cn_Registeration.objects.all()
+    for record in Cn_record:
+        print(record.Candidate_Name,"==>",record)
+    print("\n\n")
     if request.method == "POST":
         bjp =request.POST.get("BJP",False)
         # print("########## INC ########\n\n\n",request.POST["INC"],"\n\n\n")
@@ -75,7 +83,6 @@ def main(request):
         nota =request.POST.get("NOTA",False)
         record = Party(BJP=bjp,INC=inc,BSP=bsp,TMC=tmc,NCP=ncp,NPP=npp,AAP=aap,JDU=jdu,RJD=rjd,SP=sp,CPI=cpi,CPIM=cpim,RLD=rld,NOTA=nota) 
         record.save()     
-        print(bjp)   
-        return render(request,'home.html')
-    return render(request,'main.html')
+        return render(request,'home.html',)
+    return render(request,'main.html',{"view":Cn_record})
 
