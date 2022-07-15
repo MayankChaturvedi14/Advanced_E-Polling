@@ -24,8 +24,6 @@ def join(request):
             except:
                 messages.info(request, 'Username/Voter ID/DOB may be incorrect, Please Try Again.')
                 return render(request,"join.html")
-            return render(request,'join.html')
-
 
         if request.POST.get("signup")=="Signup":
             username = request.POST["user_name"]
@@ -39,7 +37,9 @@ def join(request):
             formatted_date = dob[2]+"-"+dob[1]+"-"+dob[0]
             # print(f"\n\n\n\n=======>  {formatted_date}  <===========\n\n\n\n")
             record = Registeration(Name=username,Email=email,Mobile=phone,Address=address,Aadhar=aadhar,VoterID=vid,DOB=formatted_date) 
-            record.save()          
+            record.save()
+            user_record = MyUser(user_name = username, VoterID=vid, DOB=formatted_date)          
+            user_record.save()
             return render(request,'home.html')
 
     return render(request,'join.html')
@@ -79,24 +79,28 @@ def cn(request):
 
 def main(request):
     Cn_record = Cn_Registeration.objects.all()
+    record = Party.objects.filter(id=1)
+    if not record:
+        record = Party(id=1)
+        record.save()
+
     if request.method == "POST":
-        bjp =request.POST.get("BJP",False)
+        bjp =int(request.POST.get("BJP",0) and 1)
         # print("########## INC ########\n\n\n",request.POST["INC"],"\n\n\n")
-        inc =request.POST.get("INC",False)
-        bsp =request.POST.get("BSP",False)
-        tmc =request.POST.get("TMC",False)
-        ncp =request.POST.get("NCP",False)
-        npp =request.POST.get("NPP",False)
-        aap =request.POST.get("AAP",False)
-        jdu =request.POST.get("JDU",False)
-        rjd =request.POST.get("RJD",False)
-        sp =request.POST.get("SP",False)
-        cpi =request.POST.get("CPI",False)
-        cpim =request.POST.get("CPIM",False)
-        rld =request.POST.get("RLD",False)
-        nota =request.POST.get("NOTA",False)
-        record = Party(BJP=bjp,INC=inc,BSP=bsp,TMC=tmc,NCP=ncp,NPP=npp,AAP=aap,JDU=jdu,RJD=rjd,SP=sp,CPI=cpi,CPIM=cpim,RLD=rld,NOTA=nota) 
-        record.save()     
+        inc =int(request.POST.get("INC",0) and 1)
+        bsp =int(request.POST.get("BSP",0) and 1)
+        tmc =int(request.POST.get("TMC",0) and 1)
+        ncp =int(request.POST.get("NCP",0) and 1)
+        npp =int(request.POST.get("NPP",0) and 1)
+        aap =int(request.POST.get("AAP",0) and 1)
+        jdu =int(request.POST.get("JDU",0) and 1)
+        rjd =int(request.POST.get("RJD",0) and 1)
+        sp =int(request.POST.get("SP",0) and 1)
+        cpi =int(request.POST.get("CPI",0) and 1)
+        cpim =int(request.POST.get("CPIM",0) and 1)
+        rld =int(request.POST.get("RLD",0) and 1)
+        nota =int(request.POST.get("NOTA",0) and 1)
+        Party.objects.filter(id=1).update(BJP=record[0].BJP+bjp, INC=record[0].INC+inc, BSP=record[0].BSP+bsp, TMC=record[0].TMC+tmc, NCP=record[0].NCP+ncp, NPP=record[0].NPP+npp, AAP=record[0].AAP+aap, JDU=record[0].JDU+jdu, RJD=record[0].RJD+rjd, SP=record[0].SP+sp, CPI=record[0].CPI+cpi, CPIM=record[0].CPIM+cpim, RLD=record[0].RLD+rld, NOTA=record[0].NOTA+nota)
         return render(request,'home.html',)
     return render(request,'main.html',{"view":Cn_record})
 

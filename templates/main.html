@@ -135,6 +135,7 @@
       <tbody>
         <tr>
           <td data-label="S.No">1</td>
+          {% csrf_token %}
           <td data-label="Party Name">Bharatiya Janata Party</td>
           <td data-label="Candidate Name">
             {% for record in view %}

@@ -22,20 +22,20 @@ class Cn_Registeration(models.Model):
 
     
 class Party(models.Model):
-    BJP = models.CharField(max_length=13, blank=True, null=True)
-    INC = models.CharField(max_length=13, blank=True, null=True)
-    BSP = models.CharField(max_length=13, blank=True, null=True)
-    TMC = models.CharField(max_length=13, blank=True, null=True)
-    NCP = models.CharField(max_length=13, blank=True, null=True)
-    NPP = models.CharField(max_length=13, blank=True, null=True)
-    AAP = models.CharField(max_length=13, blank=True, null=True)
-    JDU = models.CharField(max_length=13, blank=True, null=True)
-    RJD = models.CharField(max_length=13, blank=True, null=True)
-    SP = models.CharField(max_length=13, blank=True, null=True)
-    CPI = models.CharField(max_length=13, blank=True, null=True)
-    CPIM = models.CharField(max_length=13, blank=True, null=True)
-    RLD = models.CharField(max_length=13, blank=True, null=True)
-    NOTA = models.CharField(max_length=13, blank=True, null=True)
+    BJP = models.IntegerField(default=0)
+    INC = models.IntegerField(default=0)
+    BSP = models.IntegerField(default=0)
+    TMC = models.IntegerField(default=0)
+    NCP = models.IntegerField(default=0)
+    NPP = models.IntegerField(default=0)
+    AAP = models.IntegerField(default=0)
+    JDU = models.IntegerField(default=0)
+    RJD = models.IntegerField(default=0)
+    SP = models.IntegerField(default=0)
+    CPI = models.IntegerField(default=0)
+    CPIM = models.IntegerField(default=0)
+    RLD = models.IntegerField(default=0)
+    NOTA = models.IntegerField(default=0)
     
 
 # class CustomUserManager(BaseUserManager):
