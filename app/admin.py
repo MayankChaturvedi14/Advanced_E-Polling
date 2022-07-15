@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Registeration,Cn_Registeration,Party
+from .models import Registeration,Cn_Registeration,Party,MyUser
 
 # Register your models here.
 @admin.register(Registeration)
@@ -15,6 +15,6 @@ class SudoCn_Registeration(admin.ModelAdmin):
 class SudoParty(admin.ModelAdmin):
     list_display = ['BJP','INC','BSP','TMC','NCP','NPP','AAP','JDU','RJD','SP','CPI','CPIM','RLD','NOTA']
 
-# @admin.register(User)
-# class SudoUser(admin.ModelAdmin):
-#     list_display = ["user_name","VoterID","DOB"]
+@admin.register(MyUser)
+class SudoUser(admin.ModelAdmin):
+    list_display = ["user_name","VoterID","DOB"]

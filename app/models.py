@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 import datetime
 
 # Create your models here.
@@ -85,5 +85,69 @@ class Party(models.Model):
 #     def __str__(self):  
 #         return self.VoterID    
 
+class MyUserManager(BaseUserManager):
+    def create_user(self, user_name, vid, DOB):
+        if not user_name:
+            raise ValueError("username required")
+        if not vid:
+            raise ValueError("VoterID required")
+        if not DOB:
+            raise ValueError("DOB required")
+
+        user = self.model(
+            user_name=user_name,
+            VoterID = vid,
+            DOB = DOB
+        )
+        user.set_password(vid)
+        user.save(using=self._db)
+        return user
+
+
+    def create_superuser(self,user_name,password=None):
+        if not user_name:
+            raise ValueError("username required")
+        user = self.model(
+            user_name=user_name,
+        )
+        user.is_admin = True
+        user.is_superuser = True
+        user.is_staff = True
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+        
+
+
+class MyUser(AbstractBaseUser,PermissionsMixin):
+    user_name = models.CharField(unique=True, max_length=69)
+    VoterID = models.CharField(max_length=20,primary_key=True)
+    DOB = models.DateField(default=None, blank=True, null=True)
+    is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+    if is_superuser:
+        USERNAME_FIELD = "user_name"
+        REQUIRED_FIELDS = ['password']
+    else:
+        USERNAME_FIELD = "user_name"
+        REQUIRED_FIELDS = ['VoterID','DOB']
+
+
+    objects = MyUserManager()
+
+    def __str__(self) -> str:
+        return self.VoterID
+
+    def hasprem(self,prem,obj=None):
+        return True
+
+    def has_module_prems(self, app_label):
+        return True
+
+    
+
+        
 
 

@@ -1,5 +1,8 @@
-from django.shortcuts import render, HttpResponse
-from .models import Registeration,Cn_Registeration,Party
+from django.shortcuts import render
+from django.contrib.auth import login
+from django.contrib import messages
+from .models import MyUser, Registeration,Cn_Registeration,Party
+
 def index(request):
     return render(request,'home.html')
 
@@ -7,9 +10,22 @@ def join(request):
     if request.method=="POST":
         if request.POST.get("login")=="Login":
             username = request.POST["user_name"]
-            vid = request.POST["voterid"]
+            vid = request.POST["vid"]
             dob = request.POST["dob"]
-            
+            if("/" in dob):
+                year = dob.split("/")[-1]
+                month = dob.split("/")[-2]
+                day = dob.split("/")[-3]
+                dob = f"{year}-{month}-{day}"
+            user_data = MyUser.objects.filter(user_name=username,VoterID=vid,DOB=dob)
+            try:
+                login(request,user_data[0])
+                return render(request,'main.html')
+            except:
+                messages.info(request, 'Username/Voter ID/DOB may be incorrect, Please Try Again.')
+                return render(request,"join.html")
+            return render(request,'join.html')
+
 
         if request.POST.get("signup")=="Signup":
             username = request.POST["user_name"]
@@ -43,6 +59,7 @@ def list(request):
 def result(request):
     return render(request,'result.html')
 
+
 def cn(request):
     if request.method == "POST":
         candidatename = request.POST["cname"]
@@ -62,9 +79,6 @@ def cn(request):
 
 def main(request):
     Cn_record = Cn_Registeration.objects.all()
-    for record in Cn_record:
-        print(record.Candidate_Name,"==>",record)
-    print("\n\n")
     if request.method == "POST":
         bjp =request.POST.get("BJP",False)
         # print("########## INC ########\n\n\n",request.POST["INC"],"\n\n\n")
