@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Candidate Registration PAGE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script type='text/javascript' src='https://code.jquery.com/jquery-1.12.4.min.js'></script>
+</head>
+<style>
+  .navbar {
+    background: url("https://cutewallpaper.org/21/1280-x-720-background/1280x720-Blur-Blue-Gradient-Cool-Background-720P-HD-4k-.jpg");
+  }
+
+  .offcanvas-title {
+    color: white;
+    font-weight: 500;
+    font-size: 25px;
+  }
+
+  .nav-item .nav-link {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(255, 254, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }
+</style>
+
+<body
+  background="https://cutewallpaper.org/21/1280-x-720-background/1280x720-Blur-Blue-Gradient-Cool-Background-720P-HD-4k-.jpg">
+  <nav class="navbar fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" style="color: white;font-weight: 500;font-size: 25px;">E-Polling</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar" style="border-color: rgb(255, 254, 255);">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel"
+        style="background:url(https://cutewallpaper.org/21/1280-x-720-background/1280x720-Blur-Blue-Gradient-Cool-Background-720P-HD-4k-.jpg);">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">E-Polling</h5>
+          <button type="button" class="btn btn-light btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+            style="background-color: rgb(255, 254, 255);"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/ad" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/list">LIST</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="/result">Result</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cn">Candidate Registration</a>
+            </li>
+            <li class="nav-item">
+              <a href={% url 'logout' %}><button type="button" class="btn btn-outline-danger">Sign-OUT</button></a>
+          </li>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6" style="margin: 0 auto;">
+        <div class="form_container" style="border: 2px solid;padding: 40px 50px;align-items: center; margin:5rem auto;">
+          <form action="{% url 'cn' %}" enctype="multipart/form-data" method="POST">
+          
+            <h1 style="text-align: center;color: white; font-size: 28px;  ">Candidate Registration Page </h1>
+            <div class="form-group" style="margin: 2rem auto 1rem auto;">
+              <label for="name" class="form-label" style="color: white;"><sup class="star">*</sup> Name</label>
+              <input type="text" class="form-control" id="text"
+                style="background: none; color: white;border:none; border-bottom: 2px solid;" name="cname"
+                placeholder="Full Name" required>
+            </div>
+            <div class="form-group" style="margin: 2rem auto 1rem auto;">
+              <label for="name" class="form-label" style="color: white;"><sup class="star">*</sup> Party For</label>
+              <select class="form-select" aria-label="Default select example" style="background: none; color: white;border: none;border-bottom: 2px solid;" required name="party">
+                <option selected style="color: black;">Select Party For Candidate</option>
+                <option value="Bharatiya Janata Party" style="color: black;">Bharatiya Janata Party</option>
+                <option value="Indian National Congress" style="color: black;">Indian National Congress</option>
+                <option value="Bahujan Samaj Party" style="color: black;">Bahujan Samaj Party</option>
+                <option value="All India Trinamool Congress" style="color: black;">All India Trinamool Congress</option>
+                <option value="Nationalist Congress Party" style="color: black;">Nationalist Congress Party</option>
+                <option value="National People's Party" style="color: black;">National People's Party</option>
+                <option value="Aam Aadmi Party" style="color: black;">Aam Aadmi Party</option>
+                <option value="Janata Dal (United)" style="color: black;">Janata Dal (United)</option>
+                <option value="Rashtriya Janata Dal" style="color: black;">Rashtriya Janata Dal</option>
+                <option value="Samajwadi Party" style="color: black;">Samajwadi Party</option>
+                <option value="Communist Party of India" style="color: black;">Communist Party of India</option>
+                <option value="Communist_Party of India Marxist" style="color: black;">Communist Party of India (Marxist)</option>
+                <option value="Rashtriya Lok Dal" style="color: black;">Rashtriya Lok Dal</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin: 2rem auto 1rem auto;">
+              <label for="name" class="form-label" style="color: white;"><sup class="star">*</sup> Current Address</label>
+              <input type="text" class="form-control" id="text"
+                style="background: none; color: white;border:none; border-bottom: 2px solid;" name="adress"
+                placeholder="Candidate Current Address" required>
+            </div>
+            <div class="form-group" style="margin: 2rem auto 1rem auto;">
+              <label for="name" class="form-label" style="color: white;"><sup class="star">*</sup> Electoral Constituencies</label>
+              <input type="text" class="form-control" id="text"
+                style="background: none; color: white;border:none; border-bottom: 2px solid;" name="electoral_constituencies"
+                placeholder="Electoral Constituencies" required>
+            </div>
+            <div class="form-group" style="margin: 2rem auto 1rem auto;">
+              <label for="phone" class="form-label" style="color: white;"><sup class="star">*</sup> Mobile Number</label>
+              <input type="tel" id="phone" name="phone" class="form-control" maxlength="10" placeholder="Mobile Number"
+                style="background:none;color: white;border: none;border-bottom: 2px solid;" required
+                pattern="[0-9]{10}">
+            </div>
+            <div class="form-group" style="margin: 2rem auto 1rem auto;">
+              <label for="inputState" class="form-label" style="font-size: larger;color: white;"><sup
+                  class="star">*</sup> Gender : </label>
+              <select id="inputState" class="form-select" name="Gender"
+                style="background: none; color: white;border: none;border-bottom: 2px solid;" required>
+                <option selected style="font-size: larger;color: #000000;" value="">Choose</option>
+                <option style="font-size: larger; color: #000000; background: none;" value="Male">Male</option>
+                <option style="font-size: larger; color: #000000; background: none;" value="Female">Female</option>
+                <option style="font-size: larger; color: #000000; background: none;" value="Other">Other</option>
+              </select>
+            </div>
+            {% csrf_token %}
+            <div class="form-group" style="margin: 2rem auto 1rem auto;">
+              <label for="inputState" class="form-label" style="font-size: 16px;color: white;"><sup
+                  class="star">*</sup> select yes/no for upload document if your name in any FIR and in any case </label>
+              <select id="show_textbox" class="form-select show_textbox" name="case"
+                style="background: none; color: white;border: none;border-bottom: 2px solid;" required>
+                <option selected style="font-size: larger;color: #000000;" value="">Choose</option>
+                <option style="font-size: larger; color: #000000; background: none;" value="yes">Yes</option>
+                <option style="font-size: larger; color: #000000; background: none;" value="no">NO</option>
+              </select>
+            </div>
+            <div class="input-group mb-3">
+              <input type="file" class="form-control"  enctype="multipart/form-data" id="input1" style="color: #ffffff; background: none;" placeholder="upload document FIR or case" name="docfile">
+            </div>
+
+            <div class="row">
+              <div class="col-6">
+                <input type="submit" class="btn btn-primary" value="submit" 
+                  style="display: block;margin: 0 auto; background: none;">
+
+
+              </div>
+              <div class="col-6">
+                <input type="reset" class="btn btn-danger" value="reset"
+                  style="display: block;margin: 0 auto; background: none;">
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+        $(document).ready(function(){
+            $('#show_textbox').on('change',function(){
+              if($(this).val() === 'yes'){
+                $('#input1').removeAttr('disabled').focus();
+              }else{
+                $('#input1').attr('disabled','disabled');
+              }
+            });
+          });
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MAIN PAGE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<style>
+  .navbar {
+    background: url("https://img.freepik.com/free-vector/diagonal-motion-lines-white-background_1017-33198.jpg?w=2000");
+  }
+
+  .offcanvas-title {
+    
+    font-weight: 500;
+    font-size: 25px;
+  }
+
+  .nav-item .nav-link {
+    color: #202020;
+    font-weight: 500;
+    font-size: 20px;
+  }
+
+  
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table td,
+  .table th {
+    padding: 12px 15px;
+    border:1px solid black;
+    text-align: center;
+    font-size: 16px;
+    
+  }
+  
+  /*responsive*/
+  
+  @media (max-width: 500px) {
+    .table thead {
+      display: none;
+    }
+  
+    .table,
+    .table tbody,
+    .table tr,
+    .table td {
+      display: block;
+      width: 100%;
+    }
+    .table tr {
+      margin-bottom: 15px;
+    }
+    .table td {
+      padding-left: 50%;
+      text-align: left;
+      position: relative;
+    }
+    .table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 0;
+      width: 50%;
+      padding-left: 15px;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: left;
+    }
+    .table .constituency{
+      padding-bottom:30px
+    }
+  }
+  img{
+    width: 100px;
+    height: 63px;
+  }
+</style>
+
+<body
+  background="https://img.freepik.com/free-vector/diagonal-motion-lines-white-background_1017-33198.jpg?w=2000">
+  <nav class="navbar fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" style="font-weight: 500;font-size: 25px;">E-Polling</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar" style="border-color: rgb(12, 12, 12);">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel"
+        style="background:url(https://img.freepik.com/free-vector/diagonal-motion-lines-white-background_1017-33198.jpg?w=2000);">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">E-Polling</h5>
+          <button type="button" class="btn  btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/" >Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/join">JOIN US</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/faq">FAQ</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/about">About US</a>
+              </li>
+      </div>
+      </div>
+    </div>
+  </nav>
+  <form action="{% url 'main' %}" method="POST">
+    {% if messages %}
+    <div class="alert alert-danger" style="margin-top:80px;">
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% csrf_token %}
+
+    <table class="table" style="margin-top: 80px;">
+      <thead>
+        <th>S.No</th>
+        <th>Party Name</th>
+        <th>Candidate Name</th>
+        <th>Electoral Constituencies</th>
+        <th>LOGO</th>
+        <th>Vote</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="S.No">1</td>
+          {% csrf_token %}
+          <td data-label="Party Name">Bharatiya Janata Party</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if 'Bharatiya Janata Party' in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if 'Bharatiya Janata Party' in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/BJP_Flag.svg/100px-BJP_Flag.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="BJP" value="Vote"></td>
+        </tr>
+    
+        <tr>
+          <td data-label="S.No">2</td>
+          <td data-label="Party Name">Indian National Congress</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if 'Indian National Congress' in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if 'Indian National Congress' in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/INC_Flag_Official.jpg/100px-INC_Flag_Official.jpg" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="INC" value="Vote"></td>
+        </tr>
+    
+        <tr>
+          <td data-label="S.No">3</td>
+          <td data-label="Party Name">Bahujan Samaj Party</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if 'Bahujan Samaj Party' in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if 'Bahujan Samaj Party' in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Elephant_Bahujan_Samaj_Party.svg/100px-Elephant_Bahujan_Samaj_Party.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="BSP" value="Vote"></td>
+        </tr>
+    
+        <tr>
+          <td data-label="S.No">4</td>
+          <td data-label="Party Name">All India Trinamool Congress</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if 'All India Trinamool Congress' in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if 'All India Trinamool Congress' in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/All_India_Trinamool_Congress_flag_%282%29.svg/100px-All_India_Trinamool_Congress_flag_%282%29.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="TMC" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">5</td>
+          <td data-label="Party Name">Nationalist Congress Party</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if 'Nationalist Congress Party' in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if 'Nationalist Congress Party' in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/NCP-flag.svg/100px-NCP-flag.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="NCP" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">6</td>
+          <td data-label="Party Name">National People's Party</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "National People's Party" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "National People's Party" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/NPP_Flag.jpg/99px-NPP_Flag.jpg" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="NPP" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">7</td>
+          <td data-label="Party Name">	Aam Aadmi Party</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "Aam Aadmi Party" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "Aam Aadmi Party" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Aam_Aadmi_Party_logo_%28English%29.svg/100px-Aam_Aadmi_Party_logo_%28English%29.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="AAP" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">8</td>
+          <td data-label="Party Name">Janata Dal (United)</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "Janata Dal (United)" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "Janata Dal (United)" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Janata_Dal_%28United%29_Flag.svg/100px-Janata_Dal_%28United%29_Flag.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="JDU" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">9</td>
+          <td data-label="Party Name">Rashtriya Janata Dal</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "Rashtriya Janata Dal" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "Rashtriya Janata Dal" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/RJD_Flag.svg/100px-RJD_Flag.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="RJD" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">10</td>
+          <td data-label="Party Name">Samajwadi Party</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "Samajwadi Party" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "Samajwadi Party" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Samajwadi_Party_Flag.jpg/100px-Samajwadi_Party_Flag.jpg" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="SP" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">11</td>
+          <td data-label="Party Name">Communist Party of India</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "Communist Party of India" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "Communist Party of India" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/CPI-banner.svg/100px-CPI-banner.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="CPI" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">12</td>
+          <td data-label="Party Name">Communist Party of India (Marxist)</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "Communist_Party of India Marxist" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "Communist_Party of India Marxist" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/CPI-M-flag.svg/100px-CPI-M-flag.svg.png" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="CPIM" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">13</td>
+          <td data-label="Party Name">Rashtriya Lok Dal</td>
+          <td data-label="Candidate Name">
+            {% for record in view %}
+            {% if "Rashtriya Lok Dal" in record.Party %}
+              {{record.Candidate_Name}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">
+            {% for record in view %}
+            {% if "Rashtriya Lok Dal" in record.Party %}
+              {{record.ElectoralConstituencies}}
+            {% endif %}
+            {% endfor %}
+          </td>
+          <td data-label="LOGO"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Rashtriya_Lok_Dal_Flag_new.jpg/90px-Rashtriya_Lok_Dal_Flag_new.jpg" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="RLD" value="Vote"></td>
+        </tr>
+        <tr>
+          <td data-label="S.No">14</td>
+          <td data-label="Party Name">NOTA</td>
+          <td data-label="Candidate Name">
+              None
+          </td>
+          <td data-label="Electoral Constituencies" class="constituency">None</td>
+          <td data-label="LOGO"><img src="data:LOGO/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAIkAtgMBIgACEQEDEQH/xAAcAAEBAQADAQEBAAAAAAAAAAAACAcBBQYEAgP/xABNEAABAwICAgoNCAgGAwAAAAABAAIDBAUGEQchCBIxQVF0gZSy0RMWFzU2VVZhcZGTobEUFSIyNHOSwTdFRmJkcqLCIyQmM0JSU1Sz/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ANxRFwg5RfzmnjgYZJnsjYN1zzkByrrHYosDTk69W4HjTOtB26Lp+2nD/ju3c6Z1p204f8eW3nTOtB3CLpzirD3jy286Z1rjtrw749tvOmdaDuUXTdteHfHtt50zrXIxTh4/ry286Z1oO4RdOcVYeH68tvOmda47a8PePbbzpnWg7lF0vbbhwfr2286Z1rluK8OvOTb5bSeNM60Hcouo7acP+O7dzlnWuO2nD/ju3c6Z1oO4RdMcVYeH68tvOmdadtmHfHtt50zrQdyi6gYosB3L3budM60OKLAN2927nTOtB26LqY8TWGR4ZHebe5xOQAqWZn3rtGuDgC0gtO4RvoP0iIgLx+kPHVFgy3BzwJ7hOD8mps/rZb7jvNC9e4gDM7gUh6RL7JiHGFyrpHExtlMMAz+rG05NH58qD5cSYqvWJal093r5Zs/qxB2UbPMGjUPiulREBERAREQEREBERAREQEREBERAREQF7nR/pJu+FaqGCWeSqtJeOy00pLixu+YzvHfy3CvDIEFr22up7nQQV1FKJaaojEkbxvtKLNNjxcZqvB9TRynNtHVFsZz/AOLgHZevP1og06v1UNRl/wCJ3wKiXdVtV/2Go+6d8CokCDlFt2gLD9mvFkukt1tVFWyR1TWtdUQNeWjaDUMwtRdgfCZ1drdp5ozqQSAi7rGdmdYMVXO2OGTYKh3Y/PGdbf6SFqOgGw2e82u7SXW1UVY+OdgY6oga8tG13BmEGKIqvxJg3C8OH7nLDh61xyMpZHNe2kYC0hp1g5KUAgIu5wthu44nu8VttkQdI76T3u1NibvuceBUJhfRDhmz07TX04ulUQNvJUjNgP7rNzL05oJiRVvcNHeEa+B0UmH6CIEZbanhETh6C3JYppM0V1GFon3O0PfVWoH/ABA7/cg4Ntlut8+9v8KDM0Tc31QWhXC9gu2CGVVzs1DVVBqZWmWaBrnZDLIZlBPqKvu0TCXk5a+at6k7RMJeTlr5q3qQSCiqLHGDMM0mDb3U0thtsM8VDM+ORlM0Oa4NJBBy3VLoQFwqE0NYHstVgqGvvNqpauoq5XyMdURBxawHagDPe1E8q912hYR8nLZzdvUgkELlahp5w5QWK+22S1UcNJTVNMQY4WBrdu12s6t/Jw9Sy9BQGxt8H7vxtvQCJsbe8F4423oBEGtV/wBhqPunfAqJArauH2Cp+6d8ComG8goDY294LvxtvQWwLH9jb3gvHG29Ba5UzMp4JJ5M9pGwvdlwAZoMK2RlhMVfb79Cz6EzDTzngc3W08oJHIu12Nnei9cYZ0V7bSRZ2YnwHXQ02T5DEKmncNebm5OGXpGY5V4nY1957zxhnRQahinwZu3E5egVGYVmYp8GbtxOXoFSVg63Nu2KbVQPGbJ6qNrxwtzzd7gUFIaIsJswzhWF8zALhXATVL8tYz+q3kB9ea9BivEdFhWyT3S47YxR5NZGz60jjuNC7kDLc3FhGySuUjqyz2prj2Jkb6h44XE7VvqAd60HrsB6WqHFV3+a6mhdQVMmZpyZA9smX/Heydlr5CtFqIYqmB8M7GyRSNLXsduOB3QVFtrrZbbcqWugcRLTytlaQd9pBVo00wqKaKZo+jIwPA9IzQSVpGw12q4rrLc37OT2amJ3TE4nIcmsci7rBelS54RsjbVR0FJPEJXSbeUuzzdvaivZbJO3MMNmugGTw59O48Iy2w9WR9aw1BXuj7EFRijCtLd6uGKGWdzwWRZ7UZOIG76F92KrpJZMOXG6QxtlkpKd0rWOOQcQNxeY0Ifo4tv80vTK7fSV4A3/AIjJ8EGMXzTZcbxZq62S2ekjZWU74HPbK4loc0jMetZaxrnvDI2lzjqAAzJPAF+V6rRdbPnbHtnpnM20bZuzP1bgYC78kFTYftzLRY6C3RjJtNAyPVwga1/CwXpl4lurGBo+Q1z6U5fuhu76yu1c4NaXE6gM1kOgi9G4XfFcTnBwmqhVsOe6HOcD/ag/vsjKAzYWoK5rQfk1XtXHzPafzAU8KsNLdvFy0fXiLI7aOITtyG+xwd+WXKpPQUBsbe8F4423oBE2NveC8cbb0AiDWbh9gqfunfAqJuBWzcPsFT9074FRMN5BQGxt7wXjjbegtVu/emt4vJ0Ssq2NveC8cbb0Fqt3701vF5OiUHi9Cl9F6wLSwvdnPb/8q8H/AKtH0P6SPUvzowsgw9e8WW9jSyEVrJIW5ZDaObthl5teXIsv0AX/AObcVvtcpyhuce1b5pGAub6xth6lRUdLFHWS1TW5Sysax5z3Q3PLpFB8WKfBm7cTl6BUu6K3NZpDsTnnIfKctfoKqLFPgzduJy9AqPrPXPtl2orhGCX0s7JgBv7VwOXuQWqp22RjHNxdQvIO1dQjLke5UHR1MVZSxVUDw+KZgexw32kZhZZsgcOTXKx0t5pY3Pkt7nNmDBmexOy18hA5CUE8bytOyMMdmoGO3W00YP4QpP0fYdnxNiqioYY3OgbI2SpeBqZG05nP07nKq8GQGQ1AbiDJNke4DC9sacs3Vuf9DlPa2HZGXhs94ttnidmKWIzS5f8AZ5yA5A33rHkFS6EP0b23+aXpldvpJ8Ab/wARk+C6jQh+je2/zS9Mrt9JPgDf+IyfBBIYWx7HC1dlu90urm6qeFsLDlvuOZ9zR61jgVOaCbSbdgOGoe3KSvmdUH0amt9zfeg9VjStNtwjeathydFRSuYeB21OXvIWDbH+vNLjk0pdk2rpXsy4XNycPgVumObHU4jwxWWmjqY6aSpDWmWRpcA3bAnUPMs5whocumG8S2+8fPNLIKWXbOY2JwLmkEOA5CUGu3ClbXW+ppJB9CeJ0Z9BBH5qKponwSvhmaWyRuLXNO8QciFbgUjaSaEW3Hd7pQNqBVGQeh+Tv7kGtbG3vBeONt6ARc7G0f6eu5/jG9AIg1e5d7qr7l/wKiYK2bl3uqvuX/AqJggoHY294LxxtvQWq3fvTW8Xk6JU56LNI9Fgm21tLWUFRUuqJhIHROaAAG5Za17Gt07WmpoqiBtmrgZInMBL2ZDMZIMPtVfNa7jS19McpqaVsrNe+DnkrLtVfDdLbS19K4OhqImysI4CM1FW4tc0faXafDGGobTcqCqqjA93YpI3t1MJzA18BJ9yDcMU+DN24nL0CozC3S8acbVX2mso47PWtdUQPja5z2ZAuGWZ1+dYWg3rQVjqGehZhi5zbWpgz+ROef8AcZu7Qecb3m9C2RzQ9pa8BzXDIgjVkojjkfFI2SJ7mSMcHNe05FpG4QVq2FtN93t0DKe90jLkxuQEwf2OXLz6iHe5BvdutFttYl+baClpOyu20nYIms254TkNZXx4rxHQYXss1yuEga1gyjjB+lK7ea0cKyu5afIzDla7FIZSMttUzANHI0a/WFk2KsU3fFVf8rvFUZXNGUcTdUcQ/dbvendQfLfrtU328Vl0rXZz1UpkdwN4APMBkORdeiIKk0Ifo4tv80vTK7jST4A3/iMnwWP4B0uUGFsL0toqLXVTyQF5Mkb2gHbOJ3/SvtxTppt18w7cbXFaKuN9XTuiD3SNyaSN1BjNPE+eaOGIZySODGjhJOQVm4ftzbTY7fbmfVpaaOHPh2rQM1IGHa2C132guFXTuqIaWoZM6Jrsi/anMDP0gLZ+79R+IKj246kGiYvxtZsIGmF5fM01O27GIo9tuZZ/FdBTaZcI1NRFBFLWbeV4Y3OnIGZOQWMaTsdMxvW0M8VE+kZSxuYGveHElxBJ9y8dSymCpimG7G8PHIc0Ftg5qbtkJb/kuNoqwNyZWUjHE8Lm5tPuDV6hun6ka0D5gn3P/Yb1LwmlDHtLjj5vdFbZKSSl24LnyB22a7LVqHmQaPsbvBm6n+NHQauU2N3gxdOPf2NRBqtwBNBUgDMmJwA5ComIIORGRG8rgO5rUnaUcNy4cxhWw9jc2lqJHT0rstRY455chOSDyCIiAiIgIiICIiAiIgIiICIiAiIgIiICIv3BHJNNHFCxz5HuDWNaMy4nUAEFBbHAf6Vuh/jz/wDNqL2GjHDJwrhGloZh/m5P8ep80jv+PIMhyLhB61efxjhK14utwo7rE47QkxTRnJ8TjvtP5bi9AiCasQ6FcTW6V7rW2G50+f0TG8Mky87XZD1ErzTtHuLw4t7Xq7V+4q5yXKCRe59i/wAnq72adz3GB/Z6u/Aq5XKCRe57jAfs9XfgXHc9xf5PV/s1Xa4QSL3PsX+T1d7Nc9z3F/k9XfgVdIgkbueYw8nq78C4Oj3GA/Z6u/Aq6RBInc9xf5PV/s07nuL/ACer/ZqukQSN3PsX+T1d7NO59i/yervwKuUQSN3PcX+T1d7Ncdz3F/k9X+zVdIgkXue4v8nq/wBmue59i/yervZquUQSfRaMcZVkrY2WKePM5F8zmsaPSSVr2jXRNBhupjut7fHVXNhzijj1xQecZjW7z7y1NEHGSLlEBERAREQEREBERAREQEREBERAREQEREBERAREQEREH//Z" alt=""></td>
+          <td data-label="Vote"><input type="submit" class="btn btn-outline-success" name="NOTA" value="Vote"></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
